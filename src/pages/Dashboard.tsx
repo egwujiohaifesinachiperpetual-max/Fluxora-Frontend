@@ -115,8 +115,8 @@ export default function Dashboard() {
 
   return (
     <div>
-      <h1 style={{ marginTop: 0 }}>Treasury overview</h1>
-      <p style={{ color: "var(--muted)" }}>
+      <h1 className="text-heading-1" style={{ marginTop: 0 }}>Treasury overview</h1>
+      <p className="text-body-lg" style={{ color: "var(--muted)" }}>
         Treasury overview and active stream summary. Connect your wallet to see
         real-time capital flow.
       </p>
@@ -128,7 +128,7 @@ export default function Dashboard() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true" style={{ color: 'var(--status-warning)', flexShrink: 0 }}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span style={{ fontSize: '0.875rem', color: 'var(--text)' }}>
+            <span className="text-body-md" style={{ color: 'var(--text)' }}>
               Connect your Stellar wallet to see real balances and create streams.
             </span>
           </div>
@@ -145,16 +145,16 @@ export default function Dashboard() {
 
       <div style={cardGrid}>
         <div style={card}>
-          <div style={cardLabel}>Active Streams</div>
-          <div style={cardValue}>{streams.length || "—"}</div>
+          <div className="text-label-md" style={{ color: "var(--muted)", marginBottom: "0.25rem" }}>Active Streams</div>
+          <div className="text-heading-2">{streams.length || "—"}</div>
         </div>
         <div style={card}>
-          <div style={cardLabel}>Total Streaming</div>
-          <div style={cardValue}>— USDC</div>
+          <div className="text-label-md" style={{ color: "var(--muted)", marginBottom: "0.25rem" }}>Total Streaming</div>
+          <div className="text-heading-2">— USDC</div>
         </div>
         <div style={card}>
-          <div style={cardLabel}>Withdrawable</div>
-          <div style={cardValue}>— USDC</div>
+          <div className="text-label-md" style={{ color: "var(--muted)", marginBottom: "0.25rem" }}>Withdrawable</div>
+          <div className="text-heading-2">— USDC</div>
         </div>
       </div>
 
@@ -236,15 +236,4 @@ const card: React.CSSProperties = {
   border: "1px solid var(--border)",
   borderRadius: 12,
   padding: "1.25rem",
-};
-
-const cardLabel: React.CSSProperties = {
-  fontSize: "0.875rem",
-  color: "var(--muted)",
-  marginBottom: "0.25rem",
-};
-
-const cardValue: React.CSSProperties = {
-  fontSize: "1.5rem",
-  fontWeight: 600,
 };

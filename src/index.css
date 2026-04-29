@@ -477,6 +477,61 @@ button[aria-label*="Switch"]:hover {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   TYPOGRAPHY UTILITY CLASSES
+   Maps design-token font shorthands to reusable class names.
+   Usage: <h1 className="text-heading-1">…</h1>
+   ═══════════════════════════════════════════════════════════ */
+
+.text-heading-1 {
+  font: var(--font-heading-1);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.text-heading-2 {
+  font: var(--font-heading-2);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.text-heading-3 {
+  font: var(--font-heading-3);
+}
+
+.text-heading-4 {
+  font: var(--font-heading-4);
+}
+
+.text-body-lg {
+  font: var(--font-body-lg);
+}
+
+.text-body-md {
+  font: var(--font-body-md);
+}
+
+.text-body-sm {
+  font: var(--font-body-sm);
+}
+
+.text-label-lg {
+  font: var(--font-label-lg);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.text-label-md {
+  font: var(--font-label-md);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.text-label-sm {
+  font: var(--font-label-sm);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.text-mono-sm {
+  font: var(--font-mono-sm);
+}
+
 /* Screen-reader only utility */
 .sr-only {
   position: absolute;
