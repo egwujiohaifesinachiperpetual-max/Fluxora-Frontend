@@ -9,6 +9,7 @@ import ToastNotification, {
 import StreamsLoading from "../components/StreamsLoading";
 import Input from "../components/Input";
 import ZeroAccrualBanner from "../components/ZeroAccrualBanner";
+import { Pagination } from "../components/Pagination";
 import {
   getStreamRecord,
   streamRecords,
@@ -561,6 +562,11 @@ export default function Streams() {
     message: string;
     variant: ToastVariant;
   } | null>(null);
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
   const walletConnected = true;
 
   useEffect(() => {
@@ -848,6 +854,20 @@ export default function Streams() {
                 </div>
               )}
             </div>
+
+            <Pagination
+              currentPage={currentPage}
+              totalItems={visibleStreams.length}
+              itemsPerPage={itemsPerPage}
+              onPageChange={(page) => {
+                setCurrentPage(page);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              onItemsPerPageChange={(limit) => {
+                setItemsPerPage(limit);
+                setCurrentPage(1);
+              }}
+            />
           </section>
         </>
       )}
