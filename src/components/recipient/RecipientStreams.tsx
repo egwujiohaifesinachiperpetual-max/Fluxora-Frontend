@@ -92,7 +92,7 @@ export default function RecipientStreams() {
     <div className="flex flex-col gap-6 w-full">
       {/* ── Section Header ── */}
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold text-white" id="streams-list-heading">
+        <h2 className="text-xl font-bold" style={{ color: "var(--text)" }} id="streams-list-heading">
           Your Incoming Streams
         </h2>
 
@@ -109,7 +109,8 @@ export default function RecipientStreams() {
             onChange={(e) =>
               setSortKey(e.target.value as "pinned" | "newest" | "rate")
             }
-            className="bg-slate-900 border border-slate-800 text-xs font-bold text-slate-300 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-1 focus:ring-offset-black"
+            className="bg-transparent border border-[var(--border)] text-xs font-bold rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            style={{ background: "var(--surface)", color: "var(--text)" }}
           >
             <option value="pinned">Priority (Pinned)</option>
             <option value="newest">Newest First</option>
@@ -127,11 +128,13 @@ export default function RecipientStreams() {
         {sortedStreams.map((stream) => (
           <li
             key={stream.id}
-            className={`group relative overflow-hidden rounded-2xl border transition-all duration-300 hover:scale-[1.01] ${
-              stream.isPinned
-                ? "bg-gradient-to-r from-slate-900/80 to-slate-800/80 border-cyan-500/30"
-                : "bg-slate-900/50 border-slate-800 hover:border-slate-700"
+            className={`stream-card group relative overflow-hidden rounded-2xl border transition-all duration-300 hover:scale-[1.01] ${
+              stream.isPinned ? "is-active" : ""
             }`}
+            style={{ 
+              background: "var(--card-gradient)",
+              borderColor: "var(--border)"
+            }}
           >
             {/* Pinned accent bar – decorative */}
             {stream.isPinned && (
@@ -158,10 +161,10 @@ export default function RecipientStreams() {
                   {stream.senderName.charAt(0)}
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm font-bold text-white">
+                  <span className="text-sm font-bold" style={{ color: "var(--text)" }}>
                     {stream.senderName}
                   </span>
-                  <span className="text-xs text-slate-500 tabular-nums font-mono">
+                  <span className="text-xs tabular-nums font-mono" style={{ color: "var(--muted)" }}>
                     {stream.sender}
                   </span>
                 </div>
@@ -171,10 +174,10 @@ export default function RecipientStreams() {
               <div className="flex-1 flex flex-col gap-2">
                 <div className="flex justify-between items-end">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-lg font-bold text-white">
+                    <span className="text-lg font-bold" style={{ color: "var(--text)" }}>
                       {stream.amount.toLocaleString()}
                     </span>
-                    <span className="text-xs font-medium text-slate-500">
+                    <span className="text-xs font-medium" style={{ color: "var(--muted)" }}>
                       USDC Total
                     </span>
                   </div>
@@ -216,7 +219,7 @@ export default function RecipientStreams() {
                     <dt className="text-xs font-bold text-slate-500 uppercase tracking-widest">
                       Rate
                     </dt>
-                    <dd className="text-sm font-bold text-white">
+                    <dd className="text-sm font-bold" style={{ color: "var(--text)" }}>
                       {stream.rate} USDC/hr
                     </dd>
                   </div>

@@ -17,6 +17,8 @@ import {
   type StreamStatus,
 } from "../data/streamRecords";
 import "./Streams.css";
+import TruncatedAddress from "../components/common/TruncatedAddress";
+
 
 type StatusFilter = "All" | StreamStatus;
 
@@ -136,7 +138,10 @@ function StreamCard({
         <div className="stream-meta-block">
           <span>Recipient</span>
           <strong>{stream.recipientName}</strong>
-          <code>{stream.recipientAddress}</code>
+          <TruncatedAddress 
+            address={stream.recipientAddress} 
+            onCopy={() => {}} 
+          />
         </div>
         <div className="stream-meta-block">
           <span>Streaming rate</span>
@@ -195,8 +200,8 @@ function StreamCard({
                   <span className="stream-panel__row-label">Treasury</span>
                   <div className="stream-panel__row-value">
                     {stream.treasuryName}
-                    <div className="stream-panel__mono">
-                      {stream.treasuryAddress}
+                    <div className="mt-1">
+                      <TruncatedAddress address={stream.treasuryAddress} />
                     </div>
                   </div>
                 </div>
@@ -341,8 +346,11 @@ function StreamDetail({
                 <span className="stream-panel__row-label">Recipient</span>
                 <div className="stream-panel__row-value">
                   {stream.recipientName}
-                  <div className="stream-panel__mono">
-                    {stream.recipientAddress}
+                  <div className="mt-1">
+                    <TruncatedAddress 
+                      address={stream.recipientAddress} 
+                      onCopy={onCopyAddress}
+                    />
                   </div>
                 </div>
               </div>
@@ -350,8 +358,8 @@ function StreamDetail({
                 <span className="stream-panel__row-label">Treasury source</span>
                 <div className="stream-panel__row-value">
                   {stream.treasuryName}
-                  <div className="stream-panel__mono">
-                    {stream.treasuryAddress}
+                  <div className="mt-1">
+                    <TruncatedAddress address={stream.treasuryAddress} />
                   </div>
                 </div>
               </div>

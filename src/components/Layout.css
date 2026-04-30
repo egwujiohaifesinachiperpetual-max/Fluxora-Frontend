@@ -243,3 +243,16 @@
     box-shadow: none;
   }
 }
+
+/* Forced-colors fallback: replace box-shadow halos with a plain
+   outline that the high-contrast mode respects. */
+@media (forced-colors: active) {
+  .app-sidebar-toggle:focus-visible,
+  .app-nav-link:focus-visible,
+  .app-connect-button:focus-visible,
+  .app-mobile-menu-btn:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+}
