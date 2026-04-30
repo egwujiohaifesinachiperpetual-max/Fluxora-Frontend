@@ -8,6 +8,7 @@ import ConnectWalletModal from '../components/ConnectWalletModal';
 import ToastNotification, {
   type ToastVariant,
 } from "../components/ToastNotification";
+import { useLiveAnnouncer } from '../hooks/useLiveAnnouncer';
 import "../design-tokens.css";
 
 const ONBOARDING_KEY = 'fluxora_onboarding_dismissed';
@@ -38,10 +39,12 @@ export default function Dashboard() {
     message: string;
     variant: ToastVariant;
   } | null>(null);
+  const [withdrawable, setWithdrawable] = useState<number | null>(null);
 
   // Resolve wallet connection state from Freighter (best-effort, no popup)
   const [walletConnected, setWalletConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
+  const { announcement, announce } = useLiveAnnouncer();
 
   useEffect(() => {
     (async () => {
@@ -53,6 +56,8 @@ export default function Dashboard() {
         if (!addr.error && addr.address) {
           setWalletConnected(true);
           setWalletAddress(addr.address);
+          // Demo: set a balance once connected
+          setWithdrawable(22600);
         }
       } catch {
         // Freighter not installed or not approved — silent
@@ -78,7 +83,27 @@ export default function Dashboard() {
     if (!loading && streams.length === 0 && !hasSeenOnboarding()) {
       setShowOnboarding(true);
     }
-  }, [loading, streams.length]);
+    
+    if (!loading) {
+      if (streams.length > 0) {
+        announce(`${streams.length} active streams loaded.`);
+      }
+    }
+  }, [loading, streams.length, announce]);
+
+  // Announce wallet connection
+  useEffect(() => {
+    if (walletConnected && walletAddress) {
+      announce(`Wallet connected: ${walletAddress.slice(0, 4)}...${walletAddress.slice(-4)}`);
+    }
+  }, [walletConnected, walletAddress, announce]);
+
+  // Announce balance updates
+  useEffect(() => {
+    if (withdrawable !== null) {
+      announce(`Available balance updated to ${withdrawable.toLocaleString()} USDC.`);
+    }
+  }, [withdrawable, announce]);
 
   const handleDismissOnboarding = () => {
     markOnboardingSeen();
@@ -113,8 +138,12 @@ export default function Dashboard() {
   const primaryCtaClassName = "ui-primary-cta";
   const compactPrimaryCtaClassName = "ui-primary-cta ui-primary-cta--compact";
 
-  return (
     <div>
+      {/* Hidden live region for screen readers */}
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {announcement}
+      </div>
+
       <h1 className="text-heading-1" style={{ marginTop: 0 }}>Treasury overview</h1>
       <p className="text-body-lg" style={{ color: "var(--muted)" }}>
         Treasury overview and active stream summary. Connect your wallet to see
@@ -152,9 +181,9 @@ export default function Dashboard() {
           <div className="text-label-md" style={{ color: "var(--muted)", marginBottom: "0.25rem" }}>Total Streaming</div>
           <div className="text-heading-2">— USDC</div>
         </div>
-        <div style={card}>
+         <div style={card}>
           <div className="text-label-md" style={{ color: "var(--muted)", marginBottom: "0.25rem" }}>Withdrawable</div>
-          <div className="text-heading-2">— USDC</div>
+          <div className="text-heading-2">{withdrawable !== null ? `${withdrawable.toLocaleString()} USDC` : "— USDC"}</div>
         </div>
       </div>
 
