@@ -186,24 +186,25 @@
   --skeleton-base: #e6edf5;
   --skeleton-shine: #ffffff;
 
-  /* ─── Empty State Variants ─── */
-  /* search-no-results */
-  --es-search-icon-stroke: #0e7490;
-  --es-search-icon-fill: rgba(14, 116, 144, 0.08);
-  --es-search-icon-bg: rgba(14, 116, 144, 0.06);
-  --es-search-icon-border: rgba(14, 116, 144, 0.20);
-  --es-search-cta-bg: rgba(14, 116, 144, 0.10);
-  --es-search-cta-border: rgba(14, 116, 144, 0.25);
-  --es-search-cta-text: #0e7490; /* 4.5:1+ on light surface */
+  /* ─── Tooltip ─── */
+  --tooltip-bg: var(--surface-elevated);
+  --tooltip-border: var(--border-neutral);
+  --tooltip-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --tooltip-title-color: var(--text-vivid);
+  --tooltip-text-color: var(--text-secondary);
+  --tooltip-z-index: 1100;
 
-  /* error */
-  --es-error-icon-stroke: #dc2626;
-  --es-error-icon-fill: rgba(220, 38, 38, 0.08);
-  --es-error-icon-bg: rgba(220, 38, 38, 0.06);
-  --es-error-icon-border: rgba(220, 38, 38, 0.22);
-  --es-error-cta-bg: rgba(220, 38, 38, 0.10);
-  --es-error-cta-border: rgba(220, 38, 38, 0.28);
-  --es-error-cta-text: #b91c1c; /* 4.5:1+ on light surface */
+  /* ─── Inline Unit Badge (for input suffixes) ─── */
+  --input-badge-bg: var(--surface-neutral);
+  --input-badge-color: var(--text-muted);
+  --input-badge-padding: 4px 8px;
+  --input-badge-border-radius: 4px;
+
+  /* ─── Info Icon ─── */
+  --icon-info-default: var(--text-muted);
+  --icon-info-hover: var(--accent);
+  --icon-info-active: var(--accent-dim);
+  --icon-info-size: 16px;
 
   /* Navbar */
   --navbar-bg: #ffffff;
@@ -332,24 +333,14 @@
   --skeleton-base: #1f2a3e;
   --skeleton-shine: #38516f;
 
-  /* ─── Empty State Variants (dark overrides) ─── */
-  /* search-no-results */
-  --es-search-icon-stroke: #5ED3F3;
-  --es-search-icon-fill: rgba(94, 211, 243, 0.08);
-  --es-search-icon-bg: rgba(94, 211, 243, 0.08);
-  --es-search-icon-border: rgba(94, 211, 243, 0.20);
-  --es-search-cta-bg: rgba(94, 211, 243, 0.12);
-  --es-search-cta-border: rgba(94, 211, 243, 0.25);
-  --es-search-cta-text: #5ED3F3; /* 4.5:1+ on dark surface */
+  /* ─── Tooltip (dark theme) ─── */
+  --tooltip-bg: #2a2f3a;
+  --tooltip-border: #404854;
+  --tooltip-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 
-  /* error */
-  --es-error-icon-stroke: #EF4444;
-  --es-error-icon-fill: rgba(239, 68, 68, 0.10);
-  --es-error-icon-bg: rgba(239, 68, 68, 0.08);
-  --es-error-icon-border: rgba(239, 68, 68, 0.25);
-  --es-error-cta-bg: rgba(239, 68, 68, 0.12);
-  --es-error-cta-border: rgba(239, 68, 68, 0.30);
-  --es-error-cta-text: #EF4444; /* 4.5:1+ on dark surface */
+  /* ─── Inline Unit Badge (dark theme) ─── */
+  --input-badge-bg: #1f242c;
+  --input-badge-color: #9ca5b4;
 
   /* Navbar */
   --navbar-bg: #0f1419;
