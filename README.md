@@ -158,6 +158,17 @@ function ThemeToggle() {
 `useTheme()` throws if used outside a `ThemeProvider`. The provider wraps the app in
 `src/App.tsx`.
 
+## Streams performance
+
+`src/components/VirtualList.tsx` keeps small stream collections simple, then
+switches to windowed rendering once a list passes the configured threshold. The
+Streams page uses this for card lists so off-screen `StreamCard` subtrees,
+disclosures, SVGs, and `ResizeObserver` work stay unmounted while placeholders
+preserve scroll height.
+
+Virtualized placeholders only reserve space and do not echo stream data or use
+raw HTML.
+
 ## Wallet state
 
 `WalletProvider` in `src/components/wallet-connect/Walletcontext.tsx` is the
