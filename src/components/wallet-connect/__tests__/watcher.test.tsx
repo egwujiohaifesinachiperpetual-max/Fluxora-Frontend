@@ -1,5 +1,11 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+
+// The global test setup mocks Walletcontext with a no-op stub; this suite
+// exercises the real provider/watcher lifecycle, so opt back into the
+// actual implementation here.
+vi.unmock("../Walletcontext");
+
 import { WalletProvider, useWallet } from "../Walletcontext";
 
 const isConnected = vi.fn();
