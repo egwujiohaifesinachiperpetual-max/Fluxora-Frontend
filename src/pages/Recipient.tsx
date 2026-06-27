@@ -7,28 +7,16 @@ import { useWallet } from "../components/wallet-connect/Walletcontext";
 import { useToast } from "../components/toast/ToastProvider";
 import { withdraw } from "../lib/stellar/tx";
 import "./Streams.css";
-import { TRANSACTION_RESET_DELAY_MS } from "../lib/transactionConfig";
-import { useRef } from "react";
-
-// (Removed top-level timeoutRef and useEffect; will be added inside component)
+import "./Recipient.css";
 
 export default function Recipient() {
-  const timeoutRef = useRef<number | null>(null);
   const wallet = useWallet();
   const { addToast } = useToast();
 
   const [loading, setLoading] = useState(true);
   const [txState, setTxState] = useState<"idle" | "signing" | "submitting" | "confirmed" | "error">("idle");
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current !== null) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
-    };
-  }, []);
-
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(t);
@@ -64,14 +52,7 @@ export default function Recipient() {
       await withdraw(recipientAddr, streamId, amountStr);
       setTxState("confirmed");
       addToast("Withdrawal completed successfully on-chain!", "success");
-      // Clear any existing timeout to avoid overlapping timers
-      if (timeoutRef.current !== null) {
-        clearTimeout(timeoutRef.current);
-      }
-      timeoutRef.current = window.setTimeout(() => {
-        setTxState("idle");
-        timeoutRef.current = null;
-      }, TRANSACTION_RESET_DELAY_MS);
+      setTimeout(() => setTxState("idle"), 5000);
     } catch (err: any) {
       setTxState("error");
       setErrorMsg(err.message || "Withdrawal failed.");
