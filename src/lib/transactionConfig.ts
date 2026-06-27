@@ -49,3 +49,7 @@ export const transactionPollingConfig = {
     ),
   ),
 };
+
+// Configurable delay for withdrawal confirmation reset (ms)
+export const TRANSACTION_RESET_DELAY_MS = 5000; // Align with previous hard‑coded value
+
